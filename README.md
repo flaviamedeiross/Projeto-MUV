@@ -99,8 +99,7 @@ Acesse o Banco de Dados MySQL (phpMyAdmin):
 
 
 ### Pessoas Desenvolvedoras: 
-- Beatriz Cupa Newman
 - Daniela Akemi Hayashi
 - Flávia Cristina Medeiros
 - Giovana Salazar Alarcon
-- Luana Bresciani Baptista
+- Gabriel Hideki Yamamoto
