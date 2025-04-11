@@ -1,7 +1,7 @@
-# Projeto-Clinica
+# Projeto-MUV
 
 ### Descrição do Projeto
-- Somos uma clínica de psicologia e necessitamos desenvolver um sistema que seja usado pelos nossos clientes para nos encontrarem na internet e também para nos conhecerem! Esse sistema também deve ser utilizado pelos profissionais da clínica (psicólogos e atendentes), existindo a possibilidade de consultar e acrescentar informações dos clientes (cada profissional com sua devida permissão de acesso e visualização).
+- Somos uma agencia de viagens e necessitamos desenvolver um sistema que seja usado pelos nossos clientes para nos encontrarem na internet e também para nos conhecerem! Esse sistema também deve ser utilizado pelos profissionais da empresa (secretaria e atendentes), existindo a possibilidade de consultar e acrescentar informações dos clientes (cada profissional com sua devida permissão de acesso e visualização).
 
 
 ## Comandos Para a Instalação do Projeto:
@@ -91,7 +91,7 @@ Acesse o Servidor Electron:
 npm start electron .
 ```
 
-Acesse a pagina Inicial do Site da Clinica:
+Acesse a pagina Inicial do Site da Agencia:
 [http://localhost:8080](http://localhost:8080)
 
 Acesse o Banco de Dados MySQL (phpMyAdmin):
