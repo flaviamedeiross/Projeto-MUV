@@ -30,21 +30,7 @@ APP_NAME=Laravel
 APP_URL=http://localhost:8080
 
 DB_PASSWORD=root
-<<<<<<< HEAD
-
-MAIL_MAILER=smtp
-MAIL_HOST=sandbox.smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=2cb66a7b48b00a
-MAIL_PASSWORD=d1360d168b747a
-MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=from@example.com
-MAIL_FROM_NAME="${APP_NAME}"
 ```
-> Caso queria receber o email do MailTrap, substituia as informações de email acima pelas suas cadastradasno site o MailTrap
-=======
-```
->>>>>>> Home
 Suba o container do Projeto:
 ```sh
 docker compose up -d
@@ -79,14 +65,7 @@ npm run dev
 ```
 Instale os recursos adicionais para utilização do codigo:
 ```sh
-<<<<<<< HEAD
-npm install jspdf 
-```
-```sh
-npm install nodemailer
-=======
 php artisan storage:link
->>>>>>> Home
 ```
 
 ## Comandos Rodar o Projeto:
