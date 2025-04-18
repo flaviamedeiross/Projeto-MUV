@@ -7,7 +7,11 @@
     "devDependencies": {
         "@inertiajs/inertia": "^0.11.0",
         "@inertiajs/inertia-vue3": "^0.6.0",
+<<<<<<< HEAD
         "@inertiajs/progress": "^0.2.7",
+=======
+        "@inertiajs/progress": "^0.1.2",
+>>>>>>> Home
         "@inertiajs/server": "^0.1.0",
         "@tailwindcss/forms": "^0.5.2",
         "@vitejs/plugin-vue": "^3.0.0",
@@ -22,7 +26,11 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
+<<<<<<< HEAD
         "jspdf": "^2.5.1",
+=======
+        "jspdf": "^3.0.1",
+>>>>>>> Home
         "nodemailer": "^6.9.13"
     }
 }
