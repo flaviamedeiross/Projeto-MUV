@@ -93,7 +93,7 @@ import { Head } from '@inertiajs/inertia-vue3';
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white shadow-sm sm:rounded-lg hover:shadow-md transition duration-300">
                         <div class="p-6 bg-white border-b border-gray-200">
-                            <a :href="route('cliente.edit')" class="text-blue-600 hover:text-blue-800 font-bold text-lg">Editar Perfil</a>
+                            <a :href="route('cliente.edit')" class="text-black-600 hover:text-blue-800 font-bold text-lg">Editar Perfil</a>
                             <p class="ml-4 mt-2 text-gray-700"> Atualize seus dados pessoais e informações de contato.</p>
                         </div>
                     </div>

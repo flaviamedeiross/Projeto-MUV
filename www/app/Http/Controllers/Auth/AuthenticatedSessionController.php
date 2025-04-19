@@ -36,7 +36,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // Correcao para mudar de rota corretamente sem necessidade de recarregar a pagina
+        return Inertia::location(route('dashboard'));
     }
 
     /**
@@ -53,6 +54,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect(route('login'));
+        // Correcao para mudar de rota corretamente sem necessidade de recarregar a pagina
+        return Inertia::location('/');
     }
 }

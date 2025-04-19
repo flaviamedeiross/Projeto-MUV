@@ -33,27 +33,27 @@ const submit = () => {
             {{ status }}
         </div>
 
+
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="username" value="username" />
+                <InputLabel for="username" value="Usuário" />
                 <TextInput id="username" type="text" class="mt-1 block w-full" v-model="form.username" required autofocus autocomplete="username" />
                 <InputError class="mt-2" :message="form.errors.username" />
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="Senha" />
                 <TextInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <a href="/" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Voltar para home do site
-            </a>
-            <a :href="route('cadastro.cliente')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Cadastre-se
-            </a>
+            <div class="mt-2">
+                <a :href="route('cadastro.cliente')" class="underline text-sm text-gray-600 hover:text-gray-900">
+                        Cadastre-se
+                </a>
+            </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-end mt-2">
                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Login
                 </PrimaryButton>

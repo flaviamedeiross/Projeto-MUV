@@ -4,15 +4,17 @@ import { Link } from '@inertiajs/inertia-vue3';
 </script>
 
 <template>
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-        <div>
-            <Link href="/">
-                <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" />
-            </Link>
+    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-indigo-100">
+
+
+        <div class="relative flex items-center">
+            <img :src="'/storage/images/logo_dark.jpeg'" alt="Logo" class="h-[270px] sm:rounded-l-lg shadow-md" />
+            <div>
+                <div class="h-[270px] w-[310px] w-full sm:max-w-md px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-r-lg">
+                    <slot />
+                </div>
+            </div>
         </div>
 
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-            <slot />
-        </div>
     </div>
 </template>

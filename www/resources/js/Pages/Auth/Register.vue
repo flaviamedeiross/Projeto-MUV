@@ -4,7 +4,7 @@
 
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Olá, {{ $page.props.auth.user.nome }}
+                Cadastro de Funcionário
             </h2>
         </template>
         
@@ -23,19 +23,19 @@
                     </div>
 
                     <div class="mt-4">
-                        <InputLabel for="username" value="Username" />
+                        <InputLabel for="username" value="Usuário" />
                         <TextInput id="username" type="text" class="mt-1 block w-full" v-model="form.username" required autocomplete="username" />
                         <InputError class="mt-2" :message="form.errors.username" />
                     </div>
 
                     <div class="mt-4">
-                        <InputLabel for="password" value="Password" />
+                        <InputLabel for="password" value="Senha" />
                         <TextInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
                         <InputError class="mt-2" :message="form.errors.password" />
                     </div>
 
                     <div class="mt-4">
-                        <InputLabel for="role" value="Role" />
+                        <InputLabel for="role" value="Cargo" />
                         <select v-model="form.role" class="block w-full px-4 py-2 mt-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500">
                             <option disabled value="">Selecione uma opção</option>
                             <option v-for="option in options" :value="option.value" :key="option.value">{{ option.label }}</option>

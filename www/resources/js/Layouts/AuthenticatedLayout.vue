@@ -13,20 +13,22 @@ const showingNavigationDropdown = ref(false);
 <template>
     <div>
         <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+            <!-- Espacamento atras da navbar -->
+            <div class="relative size-12">
+                <div class="absolute inset-x-0 top-0 h-16"></div>
+            </div>
+            <nav class="bg-indigo-950 border-b border-gray-100 fixed top-0 right-0 left-0 z-50">
                 <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between h-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4">
+                    <div class="flex justify-between h-12">
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
-                                    <ApplicationLogo class="block h-9 w-auto" />
-                                </Link>
+                                <img :src="'/storage/images/logo_dark.jpeg'" alt="Logo" class="h-10" />
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:mt-6 sm:-my-px sm:ml-10 sm:flex">
+                            <div class="text-white hidden sm:mt-3 sm:ml-4 sm:flex">
                                 <a :href="route('dashboard')">Home</a>
                             </div>
 
@@ -38,7 +40,7 @@ const showingNavigationDropdown = ref(false);
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
-                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-950 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                                 {{ $page.props.auth.user.name }}
 
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

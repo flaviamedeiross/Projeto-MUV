@@ -4,7 +4,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">Cadastro de Sugestões</h2>
       </template>
   
-      <div class="py-6 max-w-4xl mx-auto">
+      <div class="py-6 max-w-4xl mx-auto w-[600px]">
         <form @submit.prevent="submitForm" class="bg-white p-6 rounded shadow-md">
           <div class="mb-4">
             <label class="block font-bold">Nome do lugar:</label>
@@ -38,7 +38,7 @@
             </select>
           </div>
   
-          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Salvar</button>
+          <button type="submit" class="bg-indigo-950 text-white px-4 py-2 rounded">Salvar</button>
           <p v-if="message" class="text-green-600 mt-2">{{ message }}</p>
           <p v-if="errorMessage" class="text-red-600 mt-2">{{ errorMessage }}</p>
         </form>

@@ -9,23 +9,26 @@ import { Link } from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
 </script>
+
 <template>
     <div>
         <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+            <!-- Espacamento atras da navbar -->
+            <div class="relative size-12">
+                <div class="absolute inset-x-0 top-0 h-16"></div>
+            </div>
+            <nav class="bg-indigo-950 border-b border-gray-100 fixed top-0 right-0 left-0 z-50">
                 <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between h-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4">
+                    <div class="flex justify-between h-12">
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
-                                    <ApplicationLogo class="block h-9 w-auto" />
-                                </Link>
+                                <img :src="'/storage/images/logo_dark.jpeg'" alt="Logo" class="h-10" />
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:mt-6 sm:-my-px sm:ml-10 sm:flex">
+                            <div class="text-white hidden sm:mt-3 sm:ml-4 sm:flex">
                                 <a :href="route('dashboard')">Home</a>
                             </div>
                         </div>
@@ -43,13 +46,16 @@ const showingNavigationDropdown = ref(false);
             </nav>
                     
             <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <p>Cadastro de Cliente</p>
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 font-bold">
+                    <h2>Cadastro de Cliente</h2>
                 </div>
             </header>
-            <main>            
+            <main>         
+                
+            <Link v-if="canRegister" :href="route('register')" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</Link>
+
             <div class="py-6 flex items-center justify-center"> 
-                <div class="bg-white overflow-hidden shadow-sm rounded-lg w-full max-w-lg p-6 mx-auto">
+                <div class="mt-2 py-6 max-w-4xl mx-auto bg-white w-[500px] rounded shadow">
                     <div class="leading-relaxed text-center">
                             <!-- Exibir mensagem de sucesso -->
                             <div v-if="message" class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
@@ -61,67 +67,69 @@ const showingNavigationDropdown = ref(false);
                                 {{ errorMessage }}
                             </div>
 
-                            <form @submit.prevent="submitForm" class="space-y-4">
-                                <div class="flex items-center space-x-4">
-                                    <label for="nome" class="w-32 text-right">Nome:</label>
-                                    <input type="text" v-model="form.nome" id="nome" required class="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full" />
-                                    <span v-if="errors.nome" class="text-red-500 text-left">{{ errors.nome[0] }}</span>
-                                </div>
+                            <div class="leading-relaxed text-center max-w-md mx-auto">
+                                <form @submit="submit">
+                                    <div class="mt-2">
+                                        <label for="nome" class="block text-left mb-2 font-bold">Nome</label>
+                                        <input type="text" v-model="form.nome" class="w-full px-3 py-2 border rounded" />
+                                        <span v-if="errors.nome" class="text-red-500">{{ errors.nome[0] }}</span>
+                                    </div>
 
-                                <div class="flex items-center space-x-4">
-                                    <label for="cep" class="w-32 text-right">CEP:</label>
-                                    <input type="text" v-model="form.cep" id="cep" @blur="preencherEndereco" required class="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full" />
-                                    <span v-if="errors.cep" class="text-red-500 text-left">{{ errors.cep[0] }}</span>
-                                </div>
+                                    <div class="mt-2">
+                                        <label for="cep" class="block text-left mb-2 font-bold">CEP</label>
+                                        <input type="text" v-model="form.cep" @blur="preencherEndereco" class="w-full px-3 py-2 border rounded" />
+                                        <span v-if="errors.cep" class="text-red-500">{{ errors.cep[0] }}</span>
+                                    </div>
 
-                                <div class="flex items-center space-x-4">
-                                    <label for="endereco" class="w-32 text-right">Endereço:</label>
-                                    <input type="text" v-model="form.endereco" id="endereco" required class="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full" />
-                                    <span v-if="errors.endereco" class="text-red-500 text-left">{{ errors.endereco[0] }}</span>
-                                </div>
+                                    <div class="mt-2">
+                                        <label for="endereco" class="block text-left mb-2 font-bold">Endereço</label>
+                                        <input type="text" v-model="form.endereco" class="w-full px-3 py-2 border rounded" />
+                                        <span v-if="errors.endereco" class="text-red-500">{{ errors.endereco[0] }}</span>
+                                    </div>
 
-                                <div class="flex items-center space-x-4">
-                                    <label for="bairro" class="w-32 text-right">Bairro:</label>
-                                    <input type="text" v-model="form.bairro" id="bairro" required class="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full" />
-                                    <span v-if="errors.bairro" class="text-red-500 text-left">{{ errors.bairro[0] }}</span>
-                                </div>
+                                    <div class="mt-2">
+                                        <label for="bairro" class="block text-left mb-2 font-bold">Bairro</label>
+                                        <input type="text" v-model="form.bairro" class="w-full px-3 py-2 border rounded" />
+                                        <span v-if="errors.bairro" class="text-red-500">{{ errors.bairro[0] }}</span>
+                                    </div>
 
-                                <div class="flex items-center space-x-4">
-                                    <label for="cidade" class="w-32 text-right">Cidade:</label>
-                                    <input type="text" v-model="form.cidade" id="cidade" required class="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full" />
-                                    <span v-if="errors.cidade" class="text-red-500 text-left">{{ errors.cidade[0] }}</span>
-                                </div>
+                                    <div class="mt-2">
+                                        <label for="cidade" class="block text-left mb-2 font-bold">Cidade</label>
+                                        <input type="text" v-model="form.cidade" class="w-full px-3 py-2 border rounded" />
+                                        <span v-if="errors.cidade" class="text-red-500">{{ errors.cidade[0] }}</span>
+                                    </div>
 
-                                <div class="flex items-center space-x-4">
-                                    <label for="estado" class="w-32 text-right">Estado:</label>
-                                    <input type="text" v-model="form.estado" id="estado" required class="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full" />
-                                    <span v-if="errors.estado" class="text-red-500 text-left">{{ errors.estado[0] }}</span>
-                                </div>
+                                    <div class="mt-2">
+                                        <label for="estado" class="block text-left mb-2 font-bold">Estado</label>
+                                        <input type="text" v-model="form.estado" class="w-full px-3 py-2 border rounded" />
+                                        <span v-if="errors.estado" class="text-red-500">{{ errors.estado[0] }}</span>
+                                    </div>
 
-                                <div class="flex items-center space-x-4">
-                                    <label for="telefone" class="w-32 text-right">Telefone:</label>
-                                    <input type="text" v-model="form.telefone" id="telefone" required class="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full" />
-                                    <span v-if="errors.telefone" class="text-red-500 text-left">{{ errors.telefone[0] }}</span>
-                                </div>
+                                    <div class="mt-2">
+                                        <label for="telefone" class="block text-left mb-2 font-bold">Telefone</label>
+                                        <input type="text" v-model="form.telefone" @input="formatarTelefone" class="w-full px-3 py-2 border rounded" />
+                                        <span v-if="errors.telefone" class="text-red-500">{{ errors.telefone[0] }}</span>
+                                    </div>
 
-                                <div class="flex items-center space-x-4">
-                                    <label for="username" class="w-32 text-right">Username:</label>
-                                    <input type="text" v-model="form.username" id="username" required class="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full" />
-                                    <span v-if="errors.username" class="text-red-500 text-left">{{ errors.username[0] }}</span>
-                                </div>
+                                    <div class="mt-2">
+                                        <label for="username" class="block text-left mb-2 font-bold">Usuário</label>
+                                        <input type="text" v-model="form.username" class="w-full px-3 py-2 border rounded" />
+                                        <span v-if="errors.username" class="text-red-500">{{ errors.username[0] }}</span>
+                                    </div>
 
-                                <div class="flex items-center space-x-4">
-                                    <label for="password" class="w-32 text-right">Password:</label>
-                                    <input type="password" v-model="form.password" id="password" required class="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full" />
-                                    <span v-if="errors.password" class="text-red-500 text-left">{{ errors.password[0] }}</span>
-                                </div> 
+                                    <div class="mt-2">
+                                        <label for="password" class="block text-left mb-2 font-bold">Senha</label>
+                                        <input type="password" v-model="form.password" class="w-full px-3 py-2 border rounded" />
+                                        <span v-if="errors.password" class="text-red-500">{{ errors.password[0] }}</span>
+                                    </div> 
 
-                                <div class="flex justify-end mt-4 mb-4">
-                                    <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700">
-                                        Cadastrar
-                                    </button>
-                                </div>
-                            </form>
+                                    <div class="mt-4">
+                                        <button class="bg-indigo-900 text-white px-4 py-2 rounded" :class="{ 'opacity-25': processing }" :disabled="processing">
+                                            Cadastrar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -131,9 +139,6 @@ const showingNavigationDropdown = ref(false);
 </template>
 
 <script>
-import { ref } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
-
 export default {
     data() {
         return {
@@ -149,9 +154,7 @@ export default {
                 password: ''
             },
             errors: {},
-            processing: false, 
-            message: '',
-            errorMessage: ''
+            processing: false
         };
     },
     methods: {
@@ -163,23 +166,28 @@ export default {
                     if (data.erro) {
                         this.errors.cep = ['CEP inválido.'];
                     } else {
-                        this.form.endereco = data.logradouro || '';
-                        this.form.bairro = data.bairro || '';
-                        this.form.cidade = data.localidade || '';
-                        this.form.estado = data.uf || '';
+                        this.form.endereco = data.logradouro;
+                        this.form.bairro = data.bairro;
+                        this.form.cidade = data.localidade;
+                        this.form.estado = data.uf;
                     }
                 } catch (error) {
                     console.error('Erro ao preencher endereço:', error);
                 }
             }
         },
-        async submitForm() {
-            this.message = '';
-            this.errorMessage = '';
+        formatarTelefone(event) {
+            // Remove todos os caracteres que não são números
+            const valorSomenteNumeros = event.target.value.replace(/\D/g, '');
+            // Atualiza o valor no modelo
+            this.form.telefone = valorSomenteNumeros;
+        },
+        async submit(event) {
+            event.preventDefault();
+            this.processing = true;
             try {
-                const response = await Inertia.post('/clientes', this.form);
-                this.message = 'Cliente cadastrado com sucesso!';
-                this.resetForm();
+                const response = await axios.post('/clientes', this.form);
+                alert(response.data.message);
             } catch (error) {
                 if (error.response && error.response.status === 422) {
                     this.errors = error.response.data.errors;
@@ -187,17 +195,6 @@ export default {
             } finally {
                 this.processing = false;
             }
-        },
-        resetForm() {
-            this.form.nome = '';
-            this.form.cep = '';
-            this.form.endereco = '';
-            this.form.bairro = '';
-            this.form.cidade = '';
-            this.form.estado = '';
-            this.form.telefone = '';
-            this.form.username = '';
-            this.form.password = '';
         }
     }
 };
