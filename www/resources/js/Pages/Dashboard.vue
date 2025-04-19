@@ -21,9 +21,9 @@ import { Head } from '@inertiajs/inertia-vue3';
 
         <div v-if="$page.props.user.roles.includes('secretaria')">
 
-            <Head title="Secretaria"></Head>           
+            <Head title="Funcionario"></Head>           
 
-            <div class="py-10"> 
+            <div class="py-5"> 
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 bg-white border-b border-gray-200">
@@ -34,95 +34,78 @@ import { Head } from '@inertiajs/inertia-vue3';
                 </div>
             </div>
 
-            <div class="py-10"> 
+            <div class="py-0"> 
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 bg-white border-b border-gray-200">
-                            <a :href="route('cadastroanimal')" class="text-black-600 hover:text-black-800 font-bold text-lg">Cadastro de pacotes</a>
-                            <h1 class="ml-4 mt-2">Clique aqui e cadastre os pacotes de viagem</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="py-10"> 
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 bg-white border-b border-gray-200">
-                            <a :href="route('cadastropaciente')" class="text-black-600 hover:text-black-800 font-bold text-lg">Cadastro de clientes</a>
+                            <a :href="route('cadastrocliente')" class="text-black-600 hover:text-black-800 font-bold text-lg">Cadastro de clientes</a>
                             <h1 class="ml-4 mt-2">Clique aqui e cadastre um novo cliente</h1>
                         </div>
                     </div>
                 </div>
             </div>
-            
-        </div>
-
-        <div v-if="$page.props.user.roles.includes('veterinario')">
-
-            <Head title="Veterinario"></Head>
-
-            <div>
-                <ul>
-                    <li v-for="(notificacao, index) in notificacoes" :key="index">{{ notificacao }}</li>
-                </ul>
-            </div>
-
-            <div class="py-10"> 
+            <div class="py-5">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="bg-white shadow-sm sm:rounded-lg hover:shadow-md transition duration-300">
                         <div class="p-6 bg-white border-b border-gray-200">
-                            <a href="/listapaciente" class="text-black-600 hover:text-black-800 font-bold text-lg">Lista de Pacientes</a>
-                            <h1 class="ml-4 mt-2">Clique no link acima para visualizar e editar as informacoes de todos os pacientes.</h1>
+                            <a :href="route('viagens.create')" class="text-black-600 hover:text-black-800 font-bold text-lg">Cadastro de Viagens</a>
+                            <p class="ml-4 mt-2 text-gray-700"> Clique aqui para cadastrar novas viagens.</p>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="py-0"> 
+            <div class="py-0">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="bg-white shadow-sm sm:rounded-lg hover:shadow-md transition duration-300">
                         <div class="p-6 bg-white border-b border-gray-200">
-                            <a href="/documentos" class="text-black-600 hover:text-black-800 font-bold text-lg">Documentos</a>
-                            <h1 class="ml-4 mt-2">Clique aqui para gerar um documento.</h1>
+                            <a :href="route('sugests.create')" class="text-black-600 hover:text-black-800 font-bold text-lg">Cadastro de Sugestões</a>
+                            <p class="ml-4 mt-2 text-gray-700"> Adicione sugestões enviadas pelos clientes.</p>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="py-10"> 
+            <div class="py-5">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="bg-white shadow-sm sm:rounded-lg hover:shadow-md transition duration-300">
                         <div class="p-6 bg-white border-b border-gray-200">
-                            <a :href="route('info')" class="text-black-600 hover:text-black-800 font-bold text-lg">Histórico de Consultas</a>
-                            <h1 class="ml-4 mt-2">Clique no link acima para verificar seu histórico de atendimentos.</h1>
+                            <a :href="route('reservas.create')" class="text-black-600 hover:text-black-800 font-bold text-lg">Realizar Reservas</a>
+                            <p class="ml-4 mt-2 text-gray-700"> Realize uma reserva para um cliente.</p>
                         </div>
                     </div>
                 </div>
             </div>
-
+            <div class="py-0">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white shadow-sm sm:rounded-lg hover:shadow-md transition duration-300">
+                        <div class="p-6 bg-white border-b border-gray-200">
+                            <a :href="route('reservas.index')" class="text-black-600 hover:text-black-800 font-bold text-lg">Consultar Viagens e Sugestões</a>
+                            <p class="ml-4 mt-2 text-gray-700"> Veja o histórico de viagens e sugestões feitas pelos clientes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>            
         </div>
         
         <div v-if="$page.props.user.roles.includes('cliente')">
 
             <Head title="Cliente"></Head>
             <div class="py-5">
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                            <div class="p-6 bg-white border-b border-gray-200">
-                                <a :href="route('adocao')" class="text-black-600 hover:text-black-800 font-bold text-lg">Adotar</a>
-                                <h1 class="ml-4 mt-2">Clique no link acima para adotar um de nossos animais.</h1>
-                            </div>
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white shadow-sm sm:rounded-lg hover:shadow-md transition duration-300">
+                        <div class="p-6 bg-white border-b border-gray-200">
+                            <a :href="route('cliente.edit')" class="text-blue-600 hover:text-blue-800 font-bold text-lg">Editar Perfil</a>
+                            <p class="ml-4 mt-2 text-gray-700"> Atualize seus dados pessoais e informações de contato.</p>
                         </div>
                     </div>
                 </div>
-            <div v-if="$page.props.user.roles.includes('cliente') && hasAnimals">
+            </div>
+            <div v-if="$page.props.user.roles.includes('cliente') && hasTrips">
                 <div class="py-0"> 
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="bg-white shadow-sm sm:rounded-lg hover:shadow-md transition duration-300">
                             <div class="p-6 bg-white border-b border-gray-200">
-                                <a :href="route('consultas.create')" class="text-black-600 hover:text-black-800 font-bold text-lg">Agendar Consultas</a>
-                                <h1 class="ml-4 mt-2">Clique no link acima para agendar sua consulta com um de nossos veterinarios.</h1>
+                                <a :href="route('cliente.viagens')" class="text-blue-600 hover:text-blue-800 font-bold text-lg">Minhas Viagens</a>
+                                <p class="ml-4 mt-2 text-gray-700"> Veja todas as viagens que você já comprou.</p>
                             </div>
                         </div>
                     </div>
@@ -130,21 +113,10 @@ import { Head } from '@inertiajs/inertia-vue3';
                 
                 <div class="py-5">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="bg-white shadow-sm sm:rounded-lg hover:shadow-md transition duration-300">
                             <div class="p-6 bg-white border-b border-gray-200">
-                                <a :href="route('consultas.historico')" class="text-black-600 hover:text-black-800 font-bold text-lg">Histórico de Consultas</a>
-                                <h1 class="ml-4 mt-2">Clique no link acima para verificar seu histórico de atendimentos.</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="py-0">
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                            <div class="p-6 bg-white border-b border-gray-200">
-                                <a :href="route('consultas.futuras')" class="text-black-600 hover:text-black-800 font-bold text-lg">Consultas Futuras</a>
-                                <h1 class="ml-4 mt-2">Clique no link acima para verificar suas próximas consultas agendadas.</h1>
+                                <a :href="route('cliente.futuras')" class="text-blue-600 hover:text-blue-800 font-bold text-lg">Próximas Viagens</a>
+                                <p class="ml-4 mt-2 text-gray-700"> Consulte suas próximas viagens agendadas.</p>
                             </div>
                         </div>
                     </div>
@@ -177,25 +149,10 @@ export default {
             errors: {},
             processing: false,
             notificacoes: [],
-            hasAnimals: false,
-            polling: null
+            hasTrips: false,
         };
     },
-    mounted() {
-        this.verificarNotificacoes();
-        // Configure o polling para verificar notificações a cada 5 segundos
-        this.polling = setInterval(this.verificarNotificacoes, 5000); // 5 segundos
-        this.verificarAnimais(); 
-    },
     methods: {
-        async verificarAnimais() {
-            try {
-                const response = await axios.get('/verificar-animais');
-                this.hasAnimals = response.data.hasAnimals;
-            } catch (error) {
-                console.error('Erro verificando animais:', error);
-            }
-        },
         async preencherEndereco() {
             if (this.form.cep.length === 8) {
                 try {
@@ -218,7 +175,7 @@ export default {
             event.preventDefault();
             this.processing = true;
             try {
-                const response = await axios.post('/pacientes', this.form);
+                const response = await axios.post('/clientes', this.form);
                 alert(response.data.message);
             } catch (error) {
                 if (error.response && error.response.status === 422) {
@@ -228,21 +185,7 @@ export default {
                 this.processing = false;
             }
         },
-        async verificarNotificacoes() {
-            try {
-                const response = await axios.get(`/verificar-notificacoes`);
-                const novasNotificacoes = response.data;
-                if (novasNotificacoes.length > 0) {
-                this.notificacoes.push(...novasNotificacoes);
-                }
-            } catch (error) {
-                console.error('Erro verificando notificações:', error);
-            }
-        }
     },
-    beforeDestroy() {
-        clearInterval(this.polling);
-    }
 };
 </script>
 

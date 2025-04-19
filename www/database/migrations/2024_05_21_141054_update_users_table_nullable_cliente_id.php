@@ -14,14 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('paciente_id')->nullable()->change();
+            $table->unsignedBigInteger('cliente_id')->nullable()->change();
         });
     }
 
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('paciente_id')->nullable(false)->change();
+            $table->unsignedBigInteger('cliente_id')->nullable(false)->change();
         });
     }
 };

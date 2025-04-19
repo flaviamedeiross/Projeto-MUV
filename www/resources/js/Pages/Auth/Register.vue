@@ -95,6 +95,5 @@ const submit = () => {
 
 const options = [
     { label: 'Secretaria', value: '1' },
-    { label: 'Veterinário', value: '2' },
 ];
 </script>

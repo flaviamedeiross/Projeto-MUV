@@ -23,7 +23,7 @@ class User extends Authenticatable
         'nome',
         'username',
         'password',
-        'paciente_id'
+        'cliente_id'
     ];
 
     /**
@@ -45,13 +45,8 @@ class User extends Authenticatable
         'username_verified_at' => 'datetime',
     ];
 
-    public function paciente()
+    public function clientes()
     {
-        return $this->belongsTo(Paciente::class, 'paciente_id');
-    }
-
-    public function consultas()
-    {
-        return $this->hasMany(Consulta::class, 'user_id');
+        return $this->belongsTo(Cliente::class, 'cliente_id');
     }
 }

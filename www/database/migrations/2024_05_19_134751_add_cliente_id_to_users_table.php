@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('consultas', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->date('data');
-            $table->time('horario_inicio');
-            $table->time('horario_fim');
-            $table->string('informacao')->nullable();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('cliente_id')->constrained();
         });
     }
 
@@ -30,6 +25,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('consultas');
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('cliente_id')
+            ->constrained()
+            ->onDelete('cascade');
+        });
     }
 };
