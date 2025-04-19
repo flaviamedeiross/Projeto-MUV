@@ -49,7 +49,7 @@ const submit = () => {
             <a href="/" class="underline text-sm text-gray-600 hover:text-gray-900">
                     Voltar para home do site
             </a>
-            <a :href="route('cadastro.paciente')" class="underline text-sm text-gray-600 hover:text-gray-900">
+            <a :href="route('cadastro.cliente')" class="underline text-sm text-gray-600 hover:text-gray-900">
                     Cadastre-se
             </a>
 

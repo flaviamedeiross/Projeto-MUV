@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 use Spatie\Permission\Models\Role;
-//use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Permission;
 
 class RolesSeeder extends Seeder
 {
@@ -18,7 +18,7 @@ class RolesSeeder extends Seeder
     public function run()
     {
         $role_secretaria = Role::create(['name' => 'secretaria']);
-        $role_psicologo = Role::create(['name' => 'veterinario']);
+        $role_vendedor = Role::create(['name' => 'vendedor']);
         $role_cliente = Role::create(['name' => 'cliente']);
 
     }

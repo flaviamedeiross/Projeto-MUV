@@ -35,8 +35,8 @@ const showingNavigationDropdown = ref(false);
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('cadastro.paciente')" :active="route().current('cadastro.paciente')">
-                            Cadastro Paciente
+                        <ResponsiveNavLink :href="route('cadastro.cliente')" :active="route().current('cadastro.cliente')">
+                            Cadastro Cliente
                         </ResponsiveNavLink>
                     </div>
                 </div>
@@ -44,7 +44,7 @@ const showingNavigationDropdown = ref(false);
                     
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <p>Cadastro de Paciente</p>
+                    <p>Cadastro de Cliente</p>
                 </div>
             </header>
             <main>            
@@ -177,8 +177,8 @@ export default {
             this.message = '';
             this.errorMessage = '';
             try {
-                const response = await Inertia.post('/pacientes', this.form);
-                this.message = 'Paciente cadastrado com sucesso!';
+                const response = await Inertia.post('/clientes', this.form);
+                this.message = 'Cliente cadastrado com sucesso!';
                 this.resetForm();
             } catch (error) {
                 if (error.response && error.response.status === 422) {

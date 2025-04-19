@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Paciente;
+use App\Models\Cliente;
 use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Hash;
@@ -17,11 +17,24 @@ use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
-class PacienteController extends Controller
+class ClienteController extends Controller
 {
     public function create()
     {
-        return Inertia::render('Paciente');
+        return Inertia::render('Cliente');
+    }
+
+    public function dashboard(Cliente $cliente)
+    {
+        $cliente->load([
+            'reservs.trip',
+            'reservs.sugests'
+        ]);
+
+        return Inertia::render('/minhas-viagens', [
+            'cliente' => $cliente,
+            'reservas' => $cliente->reservs
+        ]);
     }
 
     public function store(Request $request)
@@ -57,7 +70,7 @@ class PacienteController extends Controller
 
         DB::beginTransaction();
         try {
-            $paciente = Paciente::create($request->only([
+            $cliente = Cliente::create($request->only([
                 'nome', 'cep', 'endereco', 'bairro', 'cidade', 'estado', 'telefone'
             ]));
 
@@ -65,18 +78,19 @@ class PacienteController extends Controller
                 'nome' => $request->nome,
                 'username' => $request->username,
                 'password' => Hash::make($request->password),
-                'paciente_id' => $paciente->id,
+                'cliente_id' => $cliente->id,
             ]);
 
             $user->assignRole('cliente');
 
             event(new Registered($user));
-
+            
             DB::commit();
-            return response()->json(['message' => 'Paciente cadastrado com sucesso!', 'paciente' => $paciente]);
+            
+            return response()->json(['message' => 'Cliente cadastrado com sucesso!', 'cliente' => $cliente]);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Erro ao cadastrar paciente.'], 500);
+            return response()->json(['message' => 'Erro ao cadastrar cliente.'], 500);
         }
     }
 
@@ -113,7 +127,7 @@ class PacienteController extends Controller
 
         DB::beginTransaction();
         try {
-            $paciente = Paciente::create($request->only([
+            $cliente = Cliente::create($request->only([
                 'nome', 'cep', 'endereco', 'bairro', 'cidade', 'estado', 'telefone'
             ]));
 
@@ -121,7 +135,7 @@ class PacienteController extends Controller
                 'nome' => $request->nome,
                 'username' => $request->username,
                 'password' => Hash::make($request->password),
-                'paciente_id' => $paciente->id,
+                'cliente_id' => $cliente->id,
             ]);
 
             $user->assignRole('cliente');
@@ -129,17 +143,17 @@ class PacienteController extends Controller
             event(new Registered($user));
 
             DB::commit();
-            return Inertia::location(route('pacientesind'));
+            return Inertia::location(route('clientesind'));
         } catch (\Exception $e) {
             DB::rollBack();
             return Inertia::render('ErrorPage', [
-                'message' => 'Erro ao cadastrar paciente.',
+                'message' => 'Erro ao cadastrar cliente.',
             ])->withStatus(500);
         }
     }
     public function index()
     {
-        return Paciente::all();
+        return Cliente::all();
     }
 
     public function update(Request $request, $id)
@@ -162,53 +176,27 @@ class PacienteController extends Controller
 
         ], $mensagens);
 
-        $paciente = Paciente::findOrFail($id);
-        $paciente->nome = $request->nome;
-        $paciente->cep = $request->cep;
-        $paciente->endereco = $request->endereco;
-        $paciente->bairro = $request->bairro;
-        $paciente->cidade = $request->cidade;
-        $paciente->estado = $request->estado;
-        $paciente->telefone = $request->telefone;
-        $paciente->save();
+        $cliente = Cliente::findOrFail($id);
+        $cliente->nome = $request->nome;
+        $cliente->cep = $request->cep;
+        $cliente->endereco = $request->endereco;
+        $cliente->bairro = $request->bairro;
+        $cliente->cidade = $request->cidade;
+        $cliente->estado = $request->estado;
+        $cliente->telefone = $request->telefone;
+        $cliente->save();
 
-        return response()->json(['message' => 'Paciente atualizado com sucesso!']);
+        return response()->json(['message' => 'Cliente atualizado com sucesso!']);
     }
 
-    public function pacienteChegou(Request $request)
-    {
-        $pacienteId = $request->input('paciente_id');
-        $pacienteNome = $request->input('paciente_nome');
-        $veterinarioId = $request->input('veterinario');
-    
-        Log::info("Recebido pacienteId: $pacienteId, pacienteNome: $pacienteNome, veterinarioId: $veterinarioId");
-    
-        if (!$pacienteId || !$pacienteNome) {
-            Log::error('Dados de paciente incompletos');
-            return response()->json(['message' => 'Dados de paciente incompletos'], 400);
-        }
-    
-        try {
-            $notificacoes = Cache::get('notificacoes', []);
-            $notificacoes[] = "O paciente $pacienteNome chegou";
-            Cache::put('notificacoes', $notificacoes, now()->addMinutes(5));
-    
-            Log::info('Notificação armazenada com sucesso');
-            return response()->json(['message' => 'Notificação enviada ao veterinario']);
-        } catch (\Exception $e) {
-            Log::error('Erro ao processar notificação: ' . $e->getMessage());
-            return response()->json(['message' => 'Erro ao processar notificação'], 500);
-        }
-    } 
-
-    public function verificarAnimais()
+    public function verificarTrips()
     {
         $user = Auth::user();
     
         // Verifica se o cliente tem animais
-        $temAnimal = $user->paciente->animais()->exists();
+        $temTrips = $user->cliente->trip()->exists();
     
-        return response()->json(['temAnimal' => $temAnimal]);
+        return response()->json(['temTrips' => $temTrips]);
     }
     
 

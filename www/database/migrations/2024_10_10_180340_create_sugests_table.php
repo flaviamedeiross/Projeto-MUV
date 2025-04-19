@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('consultas', function (Blueprint $table) {
-            $table->foreignId('paciente_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+        Schema::create('sugests', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome');
+            $table->text('descricao');
+            $table->string('interesse');
+            $table->foreignId('trip_id')->nullable()->constrained('trips');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('consultas', function (Blueprint $table) {
-            $table->dropForeign(['paciente_id']);
-            $table->dropForeign(['user_id']);
-        });
+        Schema::dropIfExists('sugests');
     }
 };

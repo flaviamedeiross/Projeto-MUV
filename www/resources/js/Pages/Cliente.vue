@@ -26,7 +26,7 @@ import { Head } from '@inertiajs/inertia-vue3';
             <Link v-if="canRegister" :href="route('register')" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</Link>
 
             <div class="text-3xl text-gray-700 leading-relaxed text-center">
-                <p class="mt-6">Cadastro de Pacientes</p>
+                <p class="mt-6">Cadastro de Clientes</p>
             </div>
 
             <div class="leading-relaxed text-center max-w-md mx-auto">
@@ -140,7 +140,7 @@ export default {
             event.preventDefault();
             this.processing = true;
             try {
-                const response = await axios.post('/pacientes', this.form);
+                const response = await axios.post('/clientes', this.form);
                 alert(response.data.message);
             } catch (error) {
                 if (error.response && error.response.status === 422) {

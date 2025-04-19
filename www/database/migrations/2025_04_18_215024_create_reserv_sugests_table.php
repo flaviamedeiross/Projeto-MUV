@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('animais', function (Blueprint $table) {
-            $table->id();
-            $table->string('especie');
-            $table->string('nome');
-            $table->string('descricao');
-            $table->foreignId('paciente_id')->nullable()->constrained('pacientes');
-            $table->timestamps();
+        Schema::create('reserv_sugests', function (Blueprint $table) {
+            $table->foreignId('reserv_id')->constrained()->onDelete('cascade');
+            $table->foreignId('sugest_id')->constrained()->onDelete('cascade');
+            $table->primary(['reserv_id', 'sugest_id']);
         });
     }
 
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('animais');
+        Schema::dropIfExists('reserv_sugests');
     }
 };

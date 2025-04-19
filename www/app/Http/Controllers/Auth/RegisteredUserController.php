@@ -53,7 +53,7 @@ class RegisteredUserController extends Controller
                 'nome' => $request->nome,
                 'username' => $request->username,
                 'password' => Hash::make($request->password),
-                'paciente_id' => NULL,
+                'cliente_id' => NULL,
             ]);
 
             switch ($request->role) {
@@ -61,7 +61,7 @@ class RegisteredUserController extends Controller
                     $user->assignRole('secretaria');
                     break;
                 case '2':
-                    $user->assignRole('veterinario');
+                    $user->assignRole('vendedor');
                     break;
             }     
             
