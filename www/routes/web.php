@@ -67,6 +67,7 @@ Route::middleware(['auth', 'role:cliente'])->group(function () {
     Route::post('/editar-dados', [ClienteController::class, 'update'])->name('cliente.update');
 });
 
+
 Route::get('/cadastrarviagem', [TripController::class, 'create'])->name('viagens.create');
 Route::post('/cadastrarviagem', [TripController::class, 'store'])->name('viagens.store');
 

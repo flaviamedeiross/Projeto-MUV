@@ -6,6 +6,7 @@
         <thead>
           <tr class="bg-gray-100">
             <th class="p-2 border">Cliente</th>
+            <th class="p-2 border">Tipo</th>
             <th class="p-2 border">Viagem</th>
             <th class="p-2 border">Data</th>
             <th class="p-2 border">Sugestões</th>
@@ -15,7 +16,7 @@
         <tbody>
           <tr v-for="reserv in reservas" :key="reserv.id">
             <td class="p-2 border">{{ reserv.cliente.nome }}</td>
-            <td class="p-2 border">{{ reserv.trip.cidae }}</td>
+            <td class="p-2 border">{{ reserv.trip.cidade }}</td>
             <td class="p-2 border">{{ reserv.date_reserv }}</td>
             <td class="p-2 border">
               <ul>

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('reservs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cliente_id')->constrained()->onDelete('cascade');
+            $table->string('tipo_exp');
             $table->foreignId('trip_id')->constrained()->onDelete('cascade');
             $table->date('date_reserv');
             $table->timestamps();

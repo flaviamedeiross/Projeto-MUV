@@ -13,6 +13,19 @@
         </div>
   
         <div class="mb-4">
+          <label class="block mb-1">Tipo de Experiencia</label>
+          <select v-model="form.tipo_exp" class="w-full border rounded p-2">
+            <option value="" disabled selected>Selecione uma espécie</option>
+              <option value="gastronomia">Gatronomia</option>
+              <option value="musica">Musica</option>
+              <option value="Danca">Danca</option>
+              <option value="historia">Historia</option>
+              <option value="Arte">Arte</option>
+              <option value="outros">Outros</option>
+          </select>
+        </div>
+
+        <div class="mb-4">
           <label class="block mb-1">Viagem</label>
           <select v-model="form.trip_id" class="w-full border rounded p-2">
             <option v-for="trip in trips" :key="trip.id" :value="trip.id">
@@ -54,6 +67,7 @@
   
   const form = reactive({
     cliente_id: null,
+    tipo_exp: null,
     trip_id: null,
     date_reserv: null,
     sugestao_ids: []

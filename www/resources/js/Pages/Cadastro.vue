@@ -29,20 +29,25 @@
                             <div class="mt-2"> <!-- Reduzido para mt-2 -->
                                 <label for="especie" class="block text-left mb-1">Destino:</label>
                                 <select v-model="animal.especie" required class="w-full px-3 py-2 border rounded">
-                                    <option value="" disabled selected>Selecione uma destino</option>
+                                    <option value="" disabled selected>Selecione um destino</option>
                                     <option value="capetown">Cape Town - Africa do Sul</option>
                                     <option value="miami">Miami - Estados Unidos</option>
                                     <option value="rio">Rio de Janeiro - Brasil</option>
                                 </select>
                             </div>
-
+                            
                             <div class="mt-2"> <!-- Reduzido para mt-2 -->
-                                <label for="nome" class="block text-left mb-1">Nome:</label>
-                                <input type="text" v-model="animal.nome" required class="w-full px-3 py-2 border rounded" />
+                                <label for="nome" class="block text-left mb-1">Experiencias:</label>
+                                <select v-model="animal.nome" required class="w-full px-3 py-2 border rounded">
+                                    <option value="" disabled selected>Selecione as experiencias</option>
+                                    <option value="gastronomica">Gastronomica</option>
+                                    <option value="cultural">Cultural</option>
+                                    <option value="aventura">Aventura</option>
+                                </select>
                             </div>
 
                             <div class="mt-2"> <!-- Reduzido para mt-2 -->
-                                <label for="nome" class="block text-left mb-1">Descricao:</label>
+                                <label for="nome" class="block text-left mb-1">Descricao da experiencia:</label>
                                 <input type="text" v-model="animal.descricao" required class="w-full px-3 py-2 border rounded" />
                             </div>
 

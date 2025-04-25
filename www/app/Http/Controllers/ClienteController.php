@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Events\Registered;
 
 use App\Http\Controllers\Controller;
+use App\Models\Reserv;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Cache;
@@ -199,6 +200,23 @@ class ClienteController extends Controller
         return response()->json(['temTrips' => $temTrips]);
     }
     
+    public function minhasViagens()
+    {
+        $user = dd(Auth::user());
+
+        // Busca o cliente vinculado ao usuário logado
+        $cliente = $user->cliente;
+
+
+        // Carrega as reservas com as viagens associadas
+        $reservas = Reserv::with('trip')
+                    ->where('cliente_id', $cliente->id)
+                    ->get();
+
+        return Inertia::render('MinhasViagens', [
+            'reservas' => $reservas,
+        ]);
+    }
 
 
 }

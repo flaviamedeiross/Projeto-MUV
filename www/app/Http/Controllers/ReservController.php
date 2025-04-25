@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Cliente;
 use App\Models\Trip;
 use App\Models\Sugest;
@@ -16,14 +17,17 @@ class ReservController extends Controller
     {
         $reservas = Reserv::with(['cliente', 'trip', 'sugests'])->get();
 
-        return Inertia::render('Reservas/Index', ['reservas' => $reservas,]);
+        return Inertia::render('Reservas/Index', [
+            'reservas' => $reservas,
+        ]);
     }
+
     public function create()
     {
-        return Inertia::render('Reservas/Create', [
+        return Inertia::render('ReservasCriacao', [
             'clientes' => Cliente::all(),
-            'viagens' => Trip::where('quantidade_disponivel', '>', 0)->get(),
-            'sugestoes' => Sugest::all(),
+            'trips' => Trip::where('quantidade_disponivel', '>', 0)->get(),
+            'sugests' => Sugest::all(),
         ]);
     }
 
@@ -32,8 +36,9 @@ class ReservController extends Controller
         $request->validate([
             'cliente_id' => 'required|exists:clientes,id',
             'trip_id' => 'required|exists:trips,id',
-            'data_reserva' => 'required|date',
-            'sugests_ids' => 'array',
+            'tipo_exp' => 'required|string',
+            'date_reserv' => 'required|date',
+            'sugestao_ids' => 'array',
         ]);
 
         $cliente = Cliente::findOrFail($request->cliente_id);
@@ -49,14 +54,15 @@ class ReservController extends Controller
 
         $reserva = Reserv::create([
             'cliente_id' => $cliente->id,
+            'tipo_exp' => $request->tipo_exp,
             'trip_id' => $trip->id,
-            'date_reserv' => $request->data_reserva,
+            'date_reserv' => $request->date_reserv,
         ]);
 
         $trip->decrement('quantidade_disponivel');
 
-        if ($request->has('sugests_ids')) {
-            foreach ($request->sugests_ids as $sugest_id) {
+        if ($request->has('sugestao_ids')) {
+            foreach ($request->sugestao_ids as $sugest_id) {
                 ReservSugest::create([
                     'reserv_id' => $reserva->id,
                     'sugest_id' => $sugest_id,
@@ -69,14 +75,14 @@ class ReservController extends Controller
 
     public function edit($id)
     {
-        $reserva = Reserv::with('sugestoes')->findOrFail($id);
-        $sugestsIds = $reserva->sugestoes->pluck('id');
+        $reserva = Reserv::with('sugests')->findOrFail($id);
+        $sugestsIds = $reserva->sugests->pluck('id');
 
         return Inertia::render('Reservas/Edit', [
             'reserva' => $reserva,
             'clientes' => Cliente::all(),
-            'viagens' => Trip::all(),
-            'sugestoes' => Sugest::all(),
+            'trips' => Trip::all(),
+            'sugests' => Sugest::all(),
             'sugestsSelecionadas' => $sugestsIds,
         ]);
     }
@@ -85,22 +91,25 @@ class ReservController extends Controller
     {
         $request->validate([
             'cliente_id' => 'required|exists:clientes,id',
+            'tipo_exp' => 'required|string',
             'trip_id' => 'required|exists:trips,id',
-            'data_reserva' => 'required|date',
-            'sugests_ids' => 'array',
+            'date_reserv' => 'required|date',
+            'sugestao_ids' => 'array',
         ]);
 
         $reserva = Reserv::findOrFail($id);
 
         $reserva->update([
             'cliente_id' => $request->cliente_id,
+            'tipo_exp' => $request->tipo_exp,
             'trip_id' => $request->trip_id,
-            'date_reserv' => $request->data_reserva,
+            'date_reserv' => $request->date_reserv,
         ]);
 
         ReservSugest::where('reserv_id', $reserva->id)->delete();
-        if ($request->has('sugests_ids')) {
-            foreach ($request->sugests_ids as $sugest_id) {
+
+        if ($request->has('sugestao_ids')) {
+            foreach ($request->sugestao_ids as $sugest_id) {
                 ReservSugest::create([
                     'reserv_id' => $reserva->id,
                     'sugest_id' => $sugest_id,
@@ -110,6 +119,7 @@ class ReservController extends Controller
 
         return redirect()->route('reservas.index')->with('success', 'Reserva atualizada com sucesso.');
     }
+
 
     public function destroy($id)
     {

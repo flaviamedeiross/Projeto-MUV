@@ -99,7 +99,7 @@ import { Head } from '@inertiajs/inertia-vue3';
                     </div>
                 </div>
             </div>
-            <div v-if="$page.props.user.roles.includes('cliente') && hasTrips">
+            <div v-if="$page.props.user.roles.includes('cliente')">
                 <div class="py-0"> 
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div class="bg-white shadow-sm sm:rounded-lg hover:shadow-md transition duration-300">

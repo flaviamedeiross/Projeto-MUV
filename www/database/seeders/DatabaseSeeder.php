@@ -9,6 +9,7 @@ use Database\Seeders\RolesSeeder;
 use Database\Seeders\UsersSeeder;
 use Database\Seeders\TripsSeeder;
 use Database\Seeders\SugestsSeeder;
+use Database\Seeders\ReservsSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
             UsersSeeder::class,
             TripsSeeder::class, 
             SugestsSeeder::class,
+            ReservsSeeder::class,
         ]);
     }
 }
