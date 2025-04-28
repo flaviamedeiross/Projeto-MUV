@@ -9,6 +9,8 @@ class Reserv extends Model
 {
     use HasFactory;
 
+    protected $table = 'reservs';
+    
     protected $fillable = [
         'cliente_id', 
         'tipo_exp', 

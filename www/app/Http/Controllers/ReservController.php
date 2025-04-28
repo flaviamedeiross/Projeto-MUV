@@ -17,7 +17,7 @@ class ReservController extends Controller
     {
         $reservas = Reserv::with(['cliente', 'trip', 'sugests'])->get();
 
-        return Inertia::render('Reservas/Index', [
+        return Inertia::render('ReservIndex', [
             'reservas' => $reservas,
         ]);
     }

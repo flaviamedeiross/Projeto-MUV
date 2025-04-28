@@ -1,10 +1,33 @@
+<script setup>
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Link } from '@inertiajs/inertia-vue3'
+import { defineProps } from 'vue'
+import { Inertia } from '@inertiajs/inertia'
+
+const props = defineProps({
+  reservas: Array
+})
+
+function destroy(id) {
+  if (confirm('Tem certeza que deseja excluir esta reserva?')) {
+    Inertia.delete(`/reservas/${id}`)
+  }
+}
+</script>
+
 <template>
+  <AuthenticatedLayout>
+    <template #header>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        Reservas
+      </h2>
+    </template>
+
     <div class="p-6">
-      <h1 class="text-2xl font-bold mb-4">Reservas</h1>
-  
-      <table class="w-full table-auto border">
+
+      <table class="w-full table-auto border bg-gray-300">
         <thead>
-          <tr class="bg-gray-100">
+          <tr class="bg-gray-400">
             <th class="p-2 border">Cliente</th>
             <th class="p-2 border">Tipo</th>
             <th class="p-2 border">Viagem</th>
@@ -16,7 +39,8 @@
         <tbody>
           <tr v-for="reserv in reservas" :key="reserv.id">
             <td class="p-2 border">{{ reserv.cliente.nome }}</td>
-            <td class="p-2 border">{{ reserv.trip.cidade }}</td>
+            <td class="p-2 border">{{ reserv.tipo_exp }}</td> 
+            <td class="p-2 border">{{ reserv.trip.cidade }}</td> 
             <td class="p-2 border">{{ reserv.date_reserv }}</td>
             <td class="p-2 border">
               <ul>
@@ -31,20 +55,5 @@
         </tbody>
       </table>
     </div>
-  </template>
-  
-  <script setup>
-  import { router, Link } from '@inertiajs/vue3'
-  import { defineProps } from 'vue'
-  
-  const props = defineProps({
-    reservas: Array
-  })
-  
-  function destroy(id) {
-    if (confirm('Tem certeza que deseja excluir esta reserva?')) {
-      router.delete(`/reservas/${id}`)
-    }
-  }
-  </script>
-  
+  </AuthenticatedLayout>
+</template>
