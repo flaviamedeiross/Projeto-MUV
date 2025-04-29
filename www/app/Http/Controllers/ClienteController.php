@@ -202,11 +202,9 @@ class ClienteController extends Controller
     
     public function minhasViagens()
     {
-        $user = dd(Auth::user());
-
+        $user = Auth::user();
         // Busca o cliente vinculado ao usuário logado
         $cliente = $user->cliente;
-
 
         // Carrega as reservas com as viagens associadas
         $reservas = Reserv::with('trip')

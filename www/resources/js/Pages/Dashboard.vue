@@ -93,7 +93,7 @@ import { Head } from '@inertiajs/inertia-vue3';
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white shadow-sm sm:rounded-lg hover:shadow-md transition duration-300">
                         <div class="p-6 bg-white border-b border-gray-200">
-                            <a :href="route('cliente.edit')" class="text-black-600 hover:text-blue-800 font-bold text-lg">Pacotes de Viagens</a>
+                            <a :href="route('viagens.index')" class="text-black-600 hover:text-blue-800 font-bold text-lg">Pacotes de Viagens</a>
                             <p class="ml-4 mt-2 text-gray-700"> Veja os pacotes oferecidos no nosso site.</p>
                         </div>
                     </div>
@@ -106,17 +106,6 @@ import { Head } from '@inertiajs/inertia-vue3';
                             <div class="p-6 bg-white border-b border-gray-200">
                                 <a :href="route('cliente.viagens')" class="text-black-600 hover:text-blue-800 font-bold text-lg">Minhas Viagens</a>
                                 <p class="ml-4 mt-2 text-gray-700"> Veja todas as viagens que você já comprou.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="py-5">
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <div class="bg-white shadow-sm sm:rounded-lg hover:shadow-md transition duration-300">
-                            <div class="p-6 bg-white border-b border-gray-200">
-                                <a :href="route('cliente.futuras')" class="text-black-600 hover:text-blue-800 font-bold text-lg">Próximas Viagens</a>
-                                <p class="ml-4 mt-2 text-gray-700"> Consulte suas próximas viagens agendadas.</p>
                             </div>
                         </div>
                     </div>

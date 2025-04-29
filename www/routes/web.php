@@ -60,14 +60,14 @@ Route::get('/reservas/{reserv}/edit', [ReservController::class, 'edit'])->name('
 Route::put('/reservas/{reserv}', [ReservController::class, 'update'])->name('reservas.update');
 Route::delete('/reservas/{reserv}', [ReservController::class, 'destroy'])->name('reservas.destroy');
 
+Route::get('/minhas-viagens', [ClienteController::class, 'minhasViagens'])->name('cliente.viagens');
+
 Route::middleware(['auth', 'role:cliente'])->group(function () {
-    Route::get('/minhas-viagens', [ClienteController::class, 'minhasViagens'])->name('cliente.viagens');
-    Route::get('/viagens-futuras', [ClienteController::class, 'viagensFuturas'])->name('cliente.futuras');
     Route::get('/editar-dados', [ClienteController::class, 'edit'])->name('cliente.edit');
     Route::post('/editar-dados', [ClienteController::class, 'update'])->name('cliente.update');
 });
 
-
+Route::get('/viagens-disponiveis', [TripController::class, 'index'])->name('viagens.index');
 Route::get('/cadastrarviagem', [TripController::class, 'create'])->name('viagens.create');
 Route::post('/cadastrarviagem', [TripController::class, 'store'])->name('viagens.store');
 

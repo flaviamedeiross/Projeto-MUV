@@ -45,8 +45,9 @@ class User extends Authenticatable
         'username_verified_at' => 'datetime',
     ];
 
-    public function clientes()
+    public function cliente()
     {
-        return $this->belongsTo(Cliente::class, 'cliente_id');
+        return $this->belongsTo(Cliente::class);
     }
+    
 }
